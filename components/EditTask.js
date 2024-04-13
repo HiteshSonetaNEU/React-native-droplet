@@ -16,6 +16,17 @@ const EditTask = ({ route, navigation }) => {
     dueDate: task.dueDate,
   });
 
+  const handleTaskDelete = async ()=>{
+    const tasks = await AsyncStorage.getItem('tasks');
+      const parsedTasks = JSON.parse(tasks);
+      console.log(parsedTasks,task.id)
+      const updatedTasks = parsedTasks.filter(t => t.id !== task.id); 
+      await saveTasks(updatedTasks);
+      route.params.onTaskAdded();
+      console.log('updated delete')
+      // Navigate back to the task details screen with the updated task
+      navigation.goBack();   
+  }
   // Function to handle updating the task
   const handleUpdateTask = async () => {
     // Construct updated task object with edited details
@@ -39,9 +50,10 @@ const EditTask = ({ route, navigation }) => {
 
       // Save the updated tasks to AsyncStorage
       await saveTasks(parsedTasks);
-      
+      route.params.onTaskAdded();
+      console.log('updated')
       // Navigate back to the task details screen with the updated task
-      navigation.navigate('TaskDetails', { task: updatedTask });
+      navigation.goBack();
     } catch (error) {
       console.error('Error updating task:', error);
     }
@@ -68,6 +80,7 @@ const EditTask = ({ route, navigation }) => {
         value={editedTask.dueDate}
       />
       <Button title="Update Task" onPress={handleUpdateTask} />
+      <Button title="Delete" onPress={handleTaskDelete} />
     </View>
   );
 };

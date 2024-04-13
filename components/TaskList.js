@@ -5,6 +5,7 @@ import { StyleSheet, FlatList, View, Button, Alert } from 'react-native';
 import TaskItem from './TaskItem';
 import { getTasks } from './TaskData';
 
+
 const TaskList = ({ navigation }) => {
   const [tasks, setTasks] = useState([]);
 
@@ -24,6 +25,7 @@ const TaskList = ({ navigation }) => {
 
   const handleTaskAdded = async () => {
     try {
+      console.log("here1")
       const tasksFromStorage = await getTasks();
       setTasks(tasksFromStorage);
     } catch (error) {
@@ -31,6 +33,7 @@ const TaskList = ({ navigation }) => {
       Alert.alert('Error', 'Failed to fetch task data');
     }
   };
+  
 
   return (
     <View style={styles.container}>
@@ -40,7 +43,7 @@ const TaskList = ({ navigation }) => {
         renderItem={({ item }) => (
           <TaskItem
             task={item}
-            onPress={() => navigation.navigate('TaskDetails', { task: item })}
+            onPress={() => navigation.navigate('EditTask', { task: item,onTaskAdded: handleTaskAdded })}
           />
         )}
       />

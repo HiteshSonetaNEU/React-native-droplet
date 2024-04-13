@@ -8,6 +8,9 @@ const NewTask = ({ navigation, route }) => { // Modify to receive route prop
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
+  // console.log("route==",route)
+  // console.log("navigation==",navigation)
+
 
   const handleCreateTask = async () => {
     const newTask = {

@@ -2,7 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 
 const TaskDetails = ({ route, navigation }) => {
-  const { task } = route.params;
+  const  task  = route.params.task;
+  console.log("route==",route)
+  // console.log("navigation==",navigation)
+  const handleCreateTask = async () => {
+       try {
+           console.log("here")
+      // Call onTaskAdded function if it exists
+      
+        route.params.onTaskAdded;
+      
+    } catch (error) {
+      console.error('Error adding new task:', error);
+    }
+
+    navigation.goBack();
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -13,6 +28,7 @@ const TaskDetails = ({ route, navigation }) => {
       </View>
       <Button title="Edit" onPress={() => navigation.navigate('EditTask', { task })} />
       <Button title="Delete" onPress={() => console.log('Delete task with ID:', task.id)} />
+      <Button title="Save" onPress={handleCreateTask} />
     </ScrollView>
   );
 };
