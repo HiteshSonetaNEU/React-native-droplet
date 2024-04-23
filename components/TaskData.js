@@ -2,7 +2,6 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Function to retrieve task data from AsyncStorage
 export const getTasks = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('tasks');
@@ -13,7 +12,6 @@ export const getTasks = async () => {
   }
 };
 
-// Function to save task data to AsyncStorage
 export const saveTasks = async (tasks) => {
   try {
     const jsonValue = JSON.stringify(tasks);
@@ -23,7 +21,6 @@ export const saveTasks = async (tasks) => {
   }
 };
 
-// Initial task data
 const initialTasks = [
   { id: 1, title: 'Task 1', description: 'Description for Task 1', dueDate: '2024-04-20' },
   { id: 2, title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-04-22' },

@@ -4,12 +4,10 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Button, Alert } from 'react-native';
 import { getTasks, saveTasks } from './TaskData';
 
-const NewTask = ({ navigation, route }) => { // Modify to receive route prop
+const NewTask = ({ navigation, route }) => { 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
-  // console.log("route==",route)
-  // console.log("navigation==",navigation)
 
 
   const handleCreateTask = async () => {
@@ -24,10 +22,8 @@ const NewTask = ({ navigation, route }) => { // Modify to receive route prop
       const tasks = await getTasks();
       tasks.push(newTask);
       await saveTasks(tasks);
-      console.log('New task added successfully');
       Alert.alert('Success', 'New task added successfully');
       
-      // Call onTaskAdded function if it exists
       if (route.params?.onTaskAdded) {
         route.params.onTaskAdded();
       }

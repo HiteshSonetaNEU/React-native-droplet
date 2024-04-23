@@ -25,11 +25,9 @@ const TaskList = ({ navigation }) => {
 
   const handleTaskAdded = async () => {
     try {
-      console.log("here1")
       const tasksFromStorage = await getTasks();
       setTasks(tasksFromStorage);
     } catch (error) {
-      console.error('Error fetching task data:', error);
       Alert.alert('Error', 'Failed to fetch task data');
     }
   };
@@ -47,7 +45,6 @@ const TaskList = ({ navigation }) => {
           />
         )}
       />
-      {/* Pass onTaskAdded function as a parameter to navigation.navigate */}
       <Button title="New Task" onPress={() => navigation.navigate('NewTask', { onTaskAdded: handleTaskAdded })} />
     </View>
   );
